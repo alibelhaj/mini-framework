@@ -18,6 +18,7 @@ class App
      * @var ContainerInterface
      */
     private $container;
+
     /**
      * App constructor.
      * @param string[] $modules
@@ -59,5 +60,13 @@ class App
         } else {
             throw new \Exception('fatal error');
         }
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
     }
 }
