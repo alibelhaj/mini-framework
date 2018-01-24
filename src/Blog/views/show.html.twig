@@ -2,5 +2,6 @@
 {% block title slug %}
 {% block body %}
 
-    <h1>Bienvenu sur show le blog {{ slug }}</h1>
+    <h1>Bienvenu sur show le blog {{ post.name }}</h1>
+    <p>{{ post.content |nl2br }}</p>
 {% endblock %}

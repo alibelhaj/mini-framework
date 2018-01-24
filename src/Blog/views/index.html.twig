@@ -1,9 +1,11 @@
 {% extends 'layout.html.twig' %}
 {% block title "Mes article" %}
 {% block body %}
-<h1>Bienvenu sur le blog</h1>
-<ul>
-    <li><a href="{{ path('blog.show', {slug:'aeea'}) }}">lien1</a></li>
-    <li><a href="{{ path('blog.show', {slug:'poo'}) }}">lien 2</a></li>
+    <h1>Bienvenu sur le blog</h1>
+    {{ posts|length }}
+    <ul>
+        {% for post in posts %}
+            <li><a href="{{ path('blog.show', {slug:post.slug,id:post.id}) }}">{{ post.name }}</a></li>
+        {% endfor %}
 </ul>
 {% endblock %}
