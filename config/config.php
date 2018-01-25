@@ -4,6 +4,7 @@ use Framework\Renderer\RendererInterface;
 use Framework\Renderer\TwigRendererFactory;
 use Framework\Router\Route;
 use Framework\Router\RouterTwigExtension;
+use Framework\Twig\PagerFantaExtension;
 use Interop\Container\ContainerInterface;
 
 return [
@@ -13,7 +14,8 @@ return [
     'database.password' => "test123",
     'views.path' => dirname(__DIR__) . '/views',
     'twig.extensions' => [
-        DI\get(RouterTwigExtension::class)
+        DI\get(RouterTwigExtension::class),
+        DI\get(PagerFantaExtension::class)
     ],
     Route::class => \DI\object(),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class),
@@ -26,4 +28,5 @@ return [
         ]
             );
     }
+
 ];

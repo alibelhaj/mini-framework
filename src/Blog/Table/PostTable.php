@@ -2,6 +2,9 @@
 
 namespace App\Blog\Table;
 
+use Framework\Database\paginatedQuery;
+use Pagerfanta\Pagerfanta;
+
 class PostTable
 {
     /**
@@ -16,11 +19,21 @@ class PostTable
     }
 
     /**
-     * @return array
+     * @param int $perPage
+     * @param int $currentPage
+     * @return Pagerfanta
      */
-    public function findPaginated():array
+    public function findPaginated(int $perPage, int $currentPage):Pagerfanta
     {
-        return $this->pdo->query("SELECT * FROM posts ORDER BY created_at LIMIT 15 ")->fetchAll();
+        $query = new paginatedQuery(
+            $this->pdo,
+            'SELECT * FROM posts',
+            'SELECT COUNT(id) FROM posts'
+        );
+
+        return (new Pagerfanta($query))
+            ->setMaxPerPage($perPage)
+            ->setCurrentPage($currentPage);
     }
 
     /**
