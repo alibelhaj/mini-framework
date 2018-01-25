@@ -3,5 +3,6 @@
 {% block body %}
 
     <h1>Bienvenu sur show le blog {{ post.name }}</h1>
+    <div class="glyphicon-time">{{ post.created_at|ago }}</div>
     <p>{{ post.content |nl2br }}</p>
 {% endblock %}

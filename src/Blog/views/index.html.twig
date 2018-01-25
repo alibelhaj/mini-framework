@@ -2,10 +2,23 @@
 {% block title "Mes article" %}
 {% block body %}
     <h1>Bienvenu sur le blog</h1>
-    <ul>
-        {% for post in posts %}
-            <li><a href="{{ path('blog.show', {slug:post.slug,id:post.id}) }}">{{ post.name }}</a></li>
+    <div class="row">
+        {% for row in posts | batch(3) %}
+
+            <div class="card" style="width: 20rem;">
+                {% for post in row %}
+
+                    <div class="card-block">
+                        <h4 class="card-title">{{ post.name }}</h4>
+                        <div class="glyphicon-time">{{ post.created_at|ago }}</div>
+                        <p class="card-text">{{ post.content|excerpt }}</p>
+                        <a href="{{ path('blog.show', {slug:post.slug,id:post.id}) }}" class="btn btn-primary">Lire la
+                            suite</a>
+                    </div>
+                {% endfor %}
+            </div>
         {% endfor %}
-</ul>
+
+    </div>
     {{ paginate(posts,'blog.index')|raw }}
 {% endblock %}
